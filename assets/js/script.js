@@ -1,14 +1,16 @@
-var searchinput = document.querySelector(".search")
-var itemWrapper = document.querySelector("main")
-
+var searchinput = $(".search")
+var itemWrapper = $("main")
 
 
 function createmovieItem(dataArr) {
-    itemWrapper.innerHTML = ""
-    console.log(dataArr)
+    itemWrapper.html("")
+    if(!dataArr)
+    {
+       return  itemWrapper.html(`<p>No match found </p>`)
+    }
 
     for (var item of dataArr) {
-        itemWrapper.insertAdjacentHTML("beforeend",
+        itemWrapper.append(
             `<div class="movie_item" style="background-image:linear-gradient(0deg,
                 rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                url(${item.Poster})">
@@ -19,35 +21,20 @@ function createmovieItem(dataArr) {
         )
 
     }
-
-
-
-
 }
 
 function getMovieName(event) {
-    var serachText = searchinput.value.trim().toLowerCase();
+    var serachText = searchinput.val().trim();
+    
     if (event.keyCode === 13 && serachText /*&& serachText.length > 1*/) {
-        let matchesMovies = []
-        for (var movie of movieData) {
-            if (movie.title.toLowerCase().includes(serachText)) {
-                matchesMovies.push(movie)
-            }
-
-        }
-        fetch(`https://www.omdbapi.com/?apikey=d77c4980&s=${serachText}`)
-      .then(res => res.json())
-      .then(data => createmovieItem(data.Search) )
-
-     
-        
+        searchinput.val("")
+       $.get(`https://www.omdbapi.com/?apikey=d77c4980&s=${serachText}`)
+      .then(data => createmovieItem(data.Search) )       
     }
 }
 
-
-
 function init() {
-    searchinput.addEventListener("keydown", getMovieName)
+    searchinput.keydown( getMovieName)
 
 }
 
