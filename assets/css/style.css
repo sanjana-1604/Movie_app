@@ -1,0 +1,88 @@
+:root{
+    --primary:rgb(104, 187, 191);
+}
+*
+{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+a{
+    text-decoration: none;
+}
+
+.row, .col
+{
+    display:flex;
+}
+.col{
+    flex-direction: column;
+}
+.align-center
+{
+    align-items: center;
+}
+.justify-center
+{
+    justify-content: center;
+}
+.justify-space-between
+{
+    justify-content: space-around;
+}
+header{
+    padding:9px 5%;
+    background-color: var(--primary);
+}
+header h3, header nav i{
+    color:white;
+}
+header nav i{
+    font-size:1.5rem;
+    padding: 0 2px;
+}
+.search{
+    margin: 30px;
+   
+}
+.search input{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.search input::placeholder
+{
+   
+    text-align:center;
+}
+main
+{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:20px;
+    padding: 0 5%;
+}
+main .movie_item{
+    padding: 10px;
+ 
+    color:white;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: .9rem;
+    border:5px solid var(--primary);
+    border-radius: 7px;
+    line-height: 1.25;
+}
+main .movie_item > *:not(:last-child){
+    margin-bottom: 8px;
+}
+main p.no_search
+{
+    grid-column: 1/5;
+    color: #888;
+}
